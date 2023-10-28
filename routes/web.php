@@ -14,9 +14,9 @@ use App\Http\Controllers\LoginUserController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/', [LoginUserController::class, 'index']);
 Route::post('/', [LoginUserController::class, 'authenticate']);
