@@ -27,6 +27,9 @@ class Loker extends Model
 
     ];
 
+    protected $primaryKey = 'idloker';
+
+
     public function ApplyLoker()
     {
         return $this->belongsTo(ApplyLoker::class);

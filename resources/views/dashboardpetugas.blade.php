@@ -1,47 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Lowongan Kerja</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<div class="card mt-5">
-    <div class="card-header">Data Buku</div>
-    <div class="card-body"> 
-        <a href="{{ route('lokers.create')}}"class="btn btn-primary mb-4">Tambah Loker</a>
-        
-        <br>
-        <table class="table table-striped">
-            <tr>
-              <th>ID Loker</th>
-              <th>Nama</th>
-              <th>Tipe</th>
-              <th>Status</th>
-              <th>Action</th>
-              
-            </tr>
-            @foreach($lokers as $loker)
-            <tr>
-              <td>{{ $loker->idloker }}</td>
-              <td>{{ $loker->nama }}</td>
-              <td>{{ $loker->tipe }}</td>
-              <td>{{ $loker->status }}</td>
-              <td>
-              <form action="{{ route('lokers.destroy', $loker->idloker) }}" method="POST" class="d-flex justify-content-center">
-                @csrf
-                @method('delete')
-                <a href="{{ route('lokers.edit', $book->idloker) }}" class="btn btn-warning btn-sm" style="margin-right: 1rem;">Edit</a>
-                <button class="btn btn-danger btn-sm">Delete</button>
-              </form>
-              </td>
-            </tr>
-            @endforeach
-      </table>
-    </div> 
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                Dashboard
+                            </a>
+                        </li>
+                        <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Konten -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard Lowongan Kerja</h1>
+                    <!-- Form Pencarian -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Cari Nama Lowongan Kerja" id="searchInput">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Cari</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabel Lowongan Kerja -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nama Lowongan Kerja</th>
+                                <th>Tipe Lowongan Kerja</th>
+                                <th>Status Lowongan Kerja</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Isi tabel dengan data lowongan kerja -->
+                            @foreach($lokers as $loker)
+                            <tr>
+                                <td>{{ $loker->nama }}</td>
+                                <td>{{ $loker->tipe}}</td>
+                                <td>{{ $loker->status}}</td>
+                                <td>
+                                    <a href="/detail/{{$loker->idloker}}"class="btn">View</a>
+                                    
+                                    <a class="btn btn-primary">Edit</a>
+                                    <a class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach 
+                            <!-- Tambahkan baris lain sesuai dengan jumlah lowongan kerja -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
     </div>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script Pencarian -->
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            table = document.querySelector('.table');
+            tr = table.getElementsByTagName('tr');
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName('td')[0]; // Kolom Nama Lowongan Kerja
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>

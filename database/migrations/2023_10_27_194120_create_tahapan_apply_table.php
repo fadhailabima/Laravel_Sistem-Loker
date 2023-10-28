@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tahapan_applys', function (Blueprint $table) {
+        Schema::create('tahapan_applies', function (Blueprint $table) {
             $table->id();
             $table->integer('idapply');
             $table->integer('idtahapan');
