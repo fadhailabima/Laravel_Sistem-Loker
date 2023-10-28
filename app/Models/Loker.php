@@ -26,13 +26,4 @@ class Loker extends Model
         'status',
 
     ];
-
-    public function ApplyLoker()
-    {
-        return $this->belongsTo(ApplyLoker::class);
-    }
-    public function TahapanApply()
-    {
-        return $this->belongsTo(TahapanApply::class);
-    }
 }

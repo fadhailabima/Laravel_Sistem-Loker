@@ -13,13 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tahapan_applys', function (Blueprint $table) {
+        Schema::create('tahapan_applies', function (Blueprint $table) {
             $table->id();
-            $table->integer('idapply');
-            $table->integer('idtahapan');
+            $table->bigInteger('idapply')->unsigned();
+            $table->bigInteger('idtahapan')->unsigned();
             $table->integer('nilai');
             $table->date('tgl_update');
             $table->timestamps();
+        });
+
+        Schema::table('tahapan_applies', function (Blueprint $table) {
+         
+            $table->foreign('idapply')->references('idapply')->on('apply_lokers')->onUpdate('cascade')->onDelete('cascade');
+        });
+
+        Schema::table('tahapan_applies', function (Blueprint $table) {
+         
+            $table->foreign('idtahapan')->references('idtahapan')->on('tahapans')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

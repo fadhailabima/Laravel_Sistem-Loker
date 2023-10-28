@@ -15,10 +15,20 @@ return new class extends Migration
     {
         Schema::create('apply_lokers', function (Blueprint $table) {
             $table->id('idapply');
-            $table->integer('idloker');
-            $table->integer('noktp');
+            $table->bigInteger('idloker')->unsigned();
+            $table->bigInteger('noktp')->unsigned();
             $table->date('tgl_apply');
             $table->timestamps();
+        });
+
+        Schema::table('apply_lokers', function (Blueprint $table) {
+         
+            $table->foreign('idloker')->references('idloker')->on('lokers')->onUpdate('cascade')->onDelete('cascade');
+        });
+
+        Schema::table('apply_lokers', function (Blueprint $table) {
+         
+            $table->foreign('noktp')->references('noktp')->on('pencakers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
