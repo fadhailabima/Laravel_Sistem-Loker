@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Loker;
 use App\Models\Petugas;
 use App\Models\Pencaker;
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
         Loker::create([
             'idloker' => '3001',
             'idperusahaan' => 'A001',
@@ -330,6 +331,13 @@ class DatabaseSeeder extends Seeder
             'idtahapan' => '5004',
             'nilai' => '0',
             'tgl_update' => '2023-10-28',
+        ]);
+        User::create([
+            'id' => '1',
+            'nama' => 'amib',
+            'email' => 'amib@loker.com',
+            'password' => 'petugas',
+            'role' => 'petugas',
         ]);
     }
 }

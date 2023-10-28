@@ -13,12 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('petugas', function (Blueprint $table) {
-            $table->id('idpetugas');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->string('nama');
             $table->string('email')->unique();
+            $table->string('role');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+         
+            $table->foreign('email')->references('email')->on('petugas')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -29,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('petugas');
+        Schema::dropIfExists('users');
     }
 };

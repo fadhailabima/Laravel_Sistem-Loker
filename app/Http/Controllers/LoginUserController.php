@@ -9,15 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class LoginUserController extends Controller
 {
     public function index() {
-        return view('login');
+        $loginError = session('loginError');
+        return view('login', compact('loginError'));
     }
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email:dns',
-            'password' => 'required'
-        ]);
+        $credentials = $request->only('email', 'password');
 
         // $credentials = [
         //     'email' => $request->input('email'),
