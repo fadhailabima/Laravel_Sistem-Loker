@@ -265,52 +265,69 @@ class DatabaseSeeder extends Seeder
 
         ApplyLoker::create([
             'idapply' => '7001',
+            'idloker' => '3006',
+            'noktp' => '2001',
 
             'tgl_apply' => '2023-07-15',
         ]);
         ApplyLoker::create([
             'idapply' => '7002',
-
+            'idloker' => '3001',
+            'noktp' => '2002',
             'tgl_apply' => '2023-08-15',
         ]);
         ApplyLoker::create([
             'idapply' => '7003',
-
+            'idloker' => '3003',
+            'noktp' => '2003',
             'tgl_apply' => '2023-07-19',
         ]);
         ApplyLoker::create([
             'idapply' => '7004',
-
+            'idloker' => '3002',
+            'noktp' => '2004',
             'tgl_apply' => '2023-05-15',
         ]);
         ApplyLoker::create([
             'idapply' => '7005',
-
+            'idloker' => '3004',
+            'noktp' => '2005',
             'tgl_apply' => '2023-01-15',
         ]);
         ApplyLoker::create([
             'idapply' => '7006',
-
+            'idloker' => '3006',
+            'noktp' => '2006',
             'tgl_apply' => '2023-03-10',
         ]);
 
         TahapanApply::create([
+            'idapply' => '7006',
+            'idtahapan' => '5006',
             'nilai' => '1',
             'tgl_update' => '2023-10-28',
         ]);
         TahapanApply::create([
+            'idapply' => '7003',
+            'idtahapan' => '5002',
             'nilai' => '0',
             'tgl_update' => '2023-10-28',
         ]);
         TahapanApply::create([
+            'idapply' => '7001',
+            'idtahapan' => '5001',
             'nilai' => '1',
             'tgl_update' => '2023-10-28',
         ]);
         TahapanApply::create([
+            'idapply' => '7002',
+            'idtahapan' => '5003',
             'nilai' => '1',
             'tgl_update' => '2023-10-28',
         ]);
         TahapanApply::create([
+            'idapply' => '7003',
+            'idtahapan' => '5004',
             'nilai' => '0',
             'tgl_update' => '2023-10-28',
         ]);
