@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,10 +25,13 @@ class LoginUserController extends Controller
         // ];
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboardpetugas');   
-        }
+            if (Auth::user()->role == 'petugas'){
+                return redirect()->intended('dashboardpetugas'); 
 
-        return back()->with('logingagal', 'Login gagal!');
+            }
+        } 
+
+        // return back()->with('logingagal', 'Login gagal!');
         // return $credentials;
     }
 

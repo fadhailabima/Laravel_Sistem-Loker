@@ -30,23 +30,21 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Detail Lowongan Kerja</h1>
                 </div>
-
+                @foreach($lokers as $loker)
                 <!-- Detail Lowongan Kerja -->
                 <div class="card mb-3">
                     <div class="card-body">
                         
-                        <h5 class="card-title">Nama: {{$lokers->nama}}</h5>
-                        <p class="card-text">Tipe: </p>
-                        <p class="card-text">Usia Min: </p>
-                        <p class="card-text">Usia Max: </p>
-                        <p class="card-text">Gaji Min: </p>
-                        <p class="card-text">Gaji Max: </p>
-                        <p class="card-text">Nama CP: </p>
-                        <p class="card-text">Email CP: </p>
-                        <p class="card-text">Nomor Telepon CP: </p>
-                        <p class="card-text">Status: </p>
-
-                        <p class="card-text">Status: </p>
+                        <h5 class="card-title">Nama: {{$loker->nama_pekerjaan}}</h5>
+                        <p class="card-text">Tipe:  {{$loker->tipe}}</p>
+                        <p class="card-text">Usia Min: {{$loker->usia_min}}</p>
+                        <p class="card-text">Usia Max: {{$loker->usia_max}}</p>
+                        <p class="card-text">Gaji Min: {{$loker->gaji_min}}</p>
+                        <p class="card-text">Gaji Max: {{$loker->gaji_max}}</p>
+                        <p class="card-text">Nama CP: {{$loker->nama_cp}}</p>
+                        <p class="card-text">Email CP: {{$loker->email_cp}}</p>
+                        <p class="card-text">Nomor Telepon CP: {{$loker->no_telp_cp}}</p>
+                        <p class="card-text">Status: {{$loker->status}}</p>
                         
                     </div>
                 </div>
@@ -54,10 +52,12 @@
                 <!-- Daftar Pencari Kerja -->
                 <h2>Daftar Pencari Kerja yang Melamar</h2>
                 <ul class="list-group">
-                    <li class="list-group-item">Pencari Kerja A</li>
-                    <li class="list-group-item">Pencari Kerja B</li>
+                    <li class="list-group-item">{{$loker->nama}} Tahapan : {{$loker->tahapan}}</li>
+                    
+                    
                     <!-- Tambahkan nama-nama pencari kerja lainnya -->
                 </ul>
+                @endforeach
             </main>
         </div>
     </div>

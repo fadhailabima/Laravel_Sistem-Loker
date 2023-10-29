@@ -13,18 +13,20 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5">
                 <h1 class="text-center">Edit Pencari Kerja</h1>
-                <form>
+                <form method="POST" action="/edit/{{ $pencakers->noktp }}">
+                    @csrf
+                    @method('put')
                     <div class="form-group">
-                        <label for="namaPencariKerja">Nama Pencari Kerja</label>
-                        <input type="text" class="form-control" id="namaPencariKerja" value="John Doe">
+                        <label for="nama">Nama Pencari Kerja</label>
+                        <input type="text" class="form-control" id="nama" value="{{$pencakers->nama}}">
                     </div>
-                    <div class="form-group">
-                        <label for="emailPencariKerja">Email Pencari Kerja</label>
-                        <input type="email" class="form-control" id="emailPencariKerja" value="john@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="teleponPencariKerja">Nomor Telepon</label>
-                        <input type="tel" class="form-control" id="teleponPencariKerja" value="123456789">
+
+                     <div class="form-group">
+                        <label for="tahapan">Tahapan Pencari Kerja</label>
+                        <select class="form-control" id="tahapan">
+                            <option value="seleksiAdministrasi">Seleksi Administrasi</option>
+                            <option value="seleksiWawancara" selected>Seleksi Wawancara</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 </form>

@@ -32,10 +32,19 @@
                     <!-- Form Pencarian -->
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Cari Nama Lowongan Kerja" id="searchInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="filterStatus">Status</label>
+                        </div>
+                        <select class="custom-select" id="filterStatus">
+                            <option value="" selected>Semua</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="tidakaktif">Tidak Aktif</option>
+                        </select>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="searchButton">Cari</button>
                         </div>
                     </div>
+                    <a href="add" class="btn btn-primary">Tambah Loker</a>
                 </div>
 
                 <!-- Tabel Lowongan Kerja -->
@@ -57,13 +66,12 @@
                                 <td>{{ $loker->tipe}}</td>
                                 <td>{{ $loker->status}}</td>
                                 <td>
-                                    <a href="/detail/{{$loker->idloker}}"class="btn">View</a>
-                                    
-                                    <a class="btn btn-primary">Edit</a>
+                                    <a href="/detail/{{$loker->idloker}}" class="btn">View</a>
+                                    <a href="/edit/{{$loker->idloker}}" class="btn btn-primary">Edit</a>
                                     <a class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
-                            @endforeach 
+                            @endforeach
                             <!-- Tambahkan baris lain sesuai dengan jumlah lowongan kerja -->
                         </tbody>
                     </table>
@@ -84,12 +92,15 @@
             filter = input.value.toUpperCase();
             table = document.querySelector('.table');
             tr = table.getElementsByTagName('tr');
+            var statusFilter = document.getElementById('filterStatus').value;
 
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName('td')[0]; // Kolom Nama Lowongan Kerja
+                var statusTd = tr[i].getElementsByTagName('td')[2]; // Kolom Status Lowongan Kerja
                 if (td) {
                     txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    var statusTxtValue = statusTd.textContent || statusTd.innerText;
+                    if ((txtValue.toUpperCase().indexOf(filter) > -1) && (statusFilter === "" || statusTxtValue === statusFilter)) {
                         tr[i].style.display = '';
                     } else {
                         tr[i].style.display = 'none';

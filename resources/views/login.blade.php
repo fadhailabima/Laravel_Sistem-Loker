@@ -39,10 +39,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                <form class="form-signin" method="POST" action="php/login.php">
+                <form class="form-signin" method="post" action="/">
+                    @csrf
                     <h2 class="h3 mb-3 font-weight-normal">Sistem Lowongan Kerja</h2>
-                    <label for="username" class="sr-only">Email</label>
-                    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                    <label for="email" class="sr-only">Email</label>
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" required
                         autofocus>
                     <label for="password" class="sr-only">Password</label>
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password"

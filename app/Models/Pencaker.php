@@ -24,4 +24,5 @@ class Pencaker extends Model
         'file_ktp',
 
     ];
+    protected $primaryKey = 'noktp';
 }

@@ -23,16 +23,20 @@ use App\Http\Controllers\UpdatePencakerController;
 //     return view('welcome');
 // });
 Route::middleware(['guest'])->group(function(){
-Route::get('/', [LoginUserController::class, 'index']);
-Route::post('/', [LoginUserController::class, 'authenticate']);
+    Route::get('/', [LoginUserController::class, 'index']);
+    Route::post('/', [LoginUserController::class, 'authenticate']);
 });
 
 // Route::middleware(['auth'])->group(function(){
     Route::get('/dashboardpetugas', [DashboardPetugasController::class, 'index']);
-    Route::get('/detail/{idloker}', [ViewController::class, 'index']);
+    Route::get('/detail/{id}', [ViewController::class, 'index']);
     Route::get('/edit/{id}', [UpdateLokerController::class, 'edit']);
     Route::put('/edit/{id}', [UpdateLokerController::class, 'update']);
-    Route::get('/updatepencaker', [UpdatePencakerController::class, 'index']);
+    Route::get('/updatepencaker/{id}', [UpdatePencakerController::class, 'edit']);
+    
+    Route::get('/add', [UpdateLokerController::class, 'display']);
+    Route::post('/add', [UpdateLokerController::class, 'store'])->name('loker.store');
+
 // });
 
 

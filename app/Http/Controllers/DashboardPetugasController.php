@@ -8,7 +8,7 @@ class DashboardPetugasController extends Controller
 {
     public function index()
     {
-         $lokers = Loker::select('nama', 'tipe', 'status')->get(); 
+         $lokers = Loker::select('nama', 'tipe', 'status', 'idloker')->get(); 
         return view ('dashboardpetugas', compact('lokers'));
     }
 

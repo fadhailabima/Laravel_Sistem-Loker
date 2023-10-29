@@ -13,26 +13,39 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5">
                 <h1 class="text-center">Edit Lowongan Kerja</h1>
-                <form method="POST" action="/edit/{id}/{{ $loker->idloker }}">
+                <form method="POST" action="/edit/{{ $lokers->idloker }}">
                     @csrf <!-- Tambahkan CSRF Token -->
-                    @method('PUT') <!-- Tambahkan metode PUT -->
+                    @method('put') <!-- Tambahkan metode PUT -->
 
                     <div class="form-group">
                         <label for="namaLowongan">Nama Lowongan Kerja</label>
-                        <input type="text" class="form-control" id="namaLowongan" name="namaLowongan" value="{{ $loker->nama }}">
+                        <input type="text" class="form-control"  @error('namaLowongan') is-invalid @enderror" id="nama" name="nama" value="{{$lokers->nama}}">
+                        @error('namaLowongan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="tipeLowongan">Tipe Lowongan Kerja</label>
-                        <input type="text" class="form-control" id="tipeLowongan" name="tipeLowongan" value="{{ $loker->tipe }}">
+                        <input type="text" class="form-control" @error('tipeLowongan') is-invalid @enderror" id="tipe" name="tipe" value="{{$lokers->tipe}}">
+                        @error('tipeLowongan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="statusLowongan">Status Lowongan Kerja</label>
-                        <select class="form-control" id="statusLowongan" name="statusLowongan">
-                            <option value="Aktif" {{ $loker->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="Non-Aktif" {{ $loker->status == 'Non-Aktif' ? 'selected' : '' }}>Non-Aktif</option>
+                        <select class="form-control" id="status" name="status" @error('statusLowongan') is-invalid @enderror" required>
+                            <option value="Aktif" {{ $lokers->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="Non-Aktif" {{ $lokers->status == 'Non-Aktif' ? 'selected' : '' }}>Non-Aktif</option>
                         </select>
+                        @error('statusLowongan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <div>
+                        <button type="submit" class="btn btn-md btn-primary">
+                            Simpan Perubahan
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
