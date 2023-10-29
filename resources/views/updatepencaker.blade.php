@@ -11,26 +11,44 @@
 <body>
     <div class="container">
         <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboardpetugas">
+                                Dashboard
+                            </a>
+                            <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
+                        </li>
+                        <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
+                    </ul>
+                </div>
+            </nav>
+           
             <div class="col-md-6 offset-md-3 mt-5">
                 <h1 class="text-center">Edit Pencari Kerja</h1>
-                <form method="POST" action="/edit/{{ $pencakers->noktp }}">
+                @foreach($pencakers as $pencaker)
+                <form method="POST" action="/updatepencaker/{{ $pencaker->noktp }}">
                     @csrf
                     @method('put')
                     <div class="form-group">
                         <label for="nama">Nama Pencari Kerja</label>
-                        <input type="text" class="form-control" id="nama" value="{{$pencakers->nama}}">
+                        <input type="text" class="form-control" id="nama" value="{{$pencaker->nama}}">
                     </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="tahapan">Tahapan Pencari Kerja</label>
                         <select class="form-control" id="tahapan">
-                            <option value="seleksiAdministrasi">Seleksi Administrasi</option>
-                            <option value="seleksiWawancara" selected>Seleksi Wawancara</option>
+                            <option value="Seleksi Wawancara" {{ $pencaker->tahapan == 'Seleksi Wawancara' ? 'selected' : '' }}>Seleksi Wawancara</option>
+                            <option value="Seleksi Administrasi" {{ $pencaker->tahapan == 'Seleksi Administrasi' ? 'selected' : '' }}>Seleksi Administrasi</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    @endforeach
                 </form>
             </div>
+           
         </div>
     </div>
 

@@ -12,5 +12,16 @@ class DashboardPetugasController extends Controller
         return view ('dashboardpetugas', compact('lokers'));
     }
 
+    public function destroy($id)
+    {
+
+        $lokers = Loker::find($id);
+        $lokers -> delete();
+
+        return redirect('/dashboardpetugas')->with([
+            'success' => 'LokerberhasilDihapus',
+        ]);
+    }
+
 
 }

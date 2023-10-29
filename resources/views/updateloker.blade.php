@@ -6,11 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Lowongan Kerja</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container, .row {
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container h-100">
         <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboardpetugas">
+                                Dashboard
+                            </a>
+                            <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
+                        </li>
+                        <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
+                    </ul>
+                </div>
+            </nav>
             <div class="col-md-6 offset-md-3 mt-5">
                 <h1 class="text-center">Edit Lowongan Kerja</h1>
                 <form method="POST" action="/edit/{{ $lokers->idloker }}">
@@ -34,8 +58,9 @@
                     <div class="form-group">
                         <label for="statusLowongan">Status Lowongan Kerja</label>
                         <select class="form-control" id="status" name="status" @error('statusLowongan') is-invalid @enderror" required>
-                            <option value="Aktif" {{ $lokers->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="Non-Aktif" {{ $lokers->status == 'Non-Aktif' ? 'selected' : '' }}>Non-Aktif</option>
+                            <option value="Aktif" {{ $lokers->status == 'aktif' ? 'selected' : '' }}>aktif</option>
+                            <option value="ditutup" {{ $lokers->status == 'ditutup' ? 'selected' : '' }}>ditutup</option>
+                            <option value="proses seleksi" {{ $lokers->status == 'proses seleksi' ? 'selected' : '' }}>proses seleksi</option>
                         </select>
                         @error('statusLowongan')
                             <div class="invalid-feedback">{{ $message }}</div>

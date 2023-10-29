@@ -19,6 +19,7 @@
                             <a class="nav-link active" href="#">
                                 Dashboard
                             </a>
+                           <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
                         </li>
                         <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
                     </ul>
@@ -32,24 +33,27 @@
                     <!-- Form Pencarian -->
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Cari Nama Lowongan Kerja" id="searchInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="filterStatus">Status</label>
-                        </div>
-                        <select class="custom-select" id="filterStatus">
-                            <option value="" selected>Semua</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="tidakaktif">Tidak Aktif</option>
-                        </select>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="searchButton">Cari</button>
                         </div>
                     </div>
-                    <a href="add" class="btn btn-primary">Tambah Loker</a>
-                </div>
 
+                    <!-- Filter Status -->
+                    <div class="input-group mb-3">
+                        <select class="form-control" id="filterStatus">
+                            <option value="all">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="ditutup">Ditutup</option>
+                            <option value="proses">Proses Seleksi</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <a href="add"class="btn">Tambah Loker</a>
+                </div>
                 <!-- Tabel Lowongan Kerja -->
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="lokerTable">
                         <thead>
                             <tr>
                                 <th>Nama Lowongan Kerja</th>
@@ -66,12 +70,16 @@
                                 <td>{{ $loker->tipe}}</td>
                                 <td>{{ $loker->status}}</td>
                                 <td>
-                                    <a href="/detail/{{$loker->idloker}}" class="btn">View</a>
+                                    <a href="/detail/{{$loker->idloker}}"class="btn btn-info">View</a>
                                     <a href="/edit/{{$loker->idloker}}" class="btn btn-primary">Edit</a>
-                                    <a class="btn btn-danger">Delete</a>
+                                    <form action="/deleteLoker/{{ $loker->idloker }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                      </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach 
                             <!-- Tambahkan baris lain sesuai dengan jumlah lowongan kerja -->
                         </tbody>
                     </table>
@@ -84,27 +92,50 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Script Pencarian -->
+    <!-- Script Pencarian dan Filter -->
     <script>
         document.getElementById('searchButton').addEventListener('click', function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById('searchInput');
             filter = input.value.toUpperCase();
-            table = document.querySelector('.table');
+            table = document.getElementById('lokerTable');
             tr = table.getElementsByTagName('tr');
-            var statusFilter = document.getElementById('filterStatus').value;
 
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName('td')[0]; // Kolom Nama Lowongan Kerja
-                var statusTd = tr[i].getElementsByTagName('td')[2]; // Kolom Status Lowongan Kerja
                 if (td) {
                     txtValue = td.textContent || td.innerText;
-                    var statusTxtValue = statusTd.textContent || statusTd.innerText;
-                    if ((txtValue.toUpperCase().indexOf(filter) > -1) && (statusFilter === "" || statusTxtValue === statusFilter)) {
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = '';
                     } else {
                         tr[i].style.display = 'none';
                     }
+                }
+            }
+        });
+
+        document.getElementById('filterStatus').addEventListener('change', function() {
+            var filter = this.value.toUpperCase();
+            var table = document.getElementById('lokerTable');
+            var tr = table.getElementsByTagName('tr');
+
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName('td')[2]; // Kolom Status Lowongan Kerja (indeks 2)
+
+                if (filter === 'all' || !td) {
+                    tr[i].style.display = '';
+                    continue;
+                }
+
+                if (!td) {
+                    continue;
+                }
+
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = '';
+                } else {
+                    tr[i].style.display = 'none';
                 }
             }
         });

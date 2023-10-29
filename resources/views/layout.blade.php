@@ -16,6 +16,7 @@
                             <a class="nav-link active" href="#">
                                 Dashboard
                             </a>
+                            <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
                         </li>
                         <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
                     </ul>

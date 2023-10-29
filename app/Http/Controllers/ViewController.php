@@ -18,6 +18,7 @@ class ViewController extends Controller
     ->where('lokers.idloker', $id)
     ->select(
         'lokers.nama as nama_pekerjaan',
+        'pencakers.noktp',
         'lokers.tipe',
         'lokers.status',
         'lokers.usia_min',

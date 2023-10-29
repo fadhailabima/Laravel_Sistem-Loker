@@ -9,16 +9,17 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <nav id="sidebar" class="col-md-3 d-md-block bg-light sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="/dashboardpetugas">
                                 Dashboard
                             </a>
+                            <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
                         </li>
                         <!-- Tambahkan menu sidebar lainnya di sini jika diperlukan -->
                     </ul>
@@ -52,6 +53,7 @@
                 <!-- Daftar Pencari Kerja -->
                 <h2>Daftar Pencari Kerja yang Melamar</h2>
                 <ul class="list-group">
+                    <a href="/updatepencaker/{{$loker->noktp}}"class="btn btn-info">View</a>
                     <li class="list-group-item">{{$loker->nama}} Tahapan : {{$loker->tahapan}}</li>
                     
                     
