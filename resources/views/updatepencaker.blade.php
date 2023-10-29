@@ -34,7 +34,7 @@
                     @method('put')
                     <div class="form-group">
                         <label for="nama">Nama Pencari Kerja</label>
-                        <input type="text" class="form-control" id="nama" value="{{$pencaker->nama}}">
+                        <input type="text" class="form-control" id="nama" value="{{$pencaker->nama}}" disabled>
                     </div>
 
                     <div class="form-group">
