@@ -21,12 +21,12 @@ use App\Http\Controllers\UpdatePencakerController;
 
 Route::middleware(['guest'])->group(function(){
     Route::get('/', [LoginUserController::class, 'index']);
-    Route::post('/', [LoginUserController::class, 'authenticate'])->name('authenticate');
+    Route::post('/', [LoginUserController::class, 'authenticate']);
 });
 
-// Route::middleware(['auth'])->group(function(){   
+Route::middleware(['auth'])->group(function(){   
     Route::get('/dashboardpetugas', [DashboardPetugasController::class, 'index']);
-    Route::post('/dashboardpetugas', [DashboardPetugasController::class, 'index']);
+    // Route::post('/dashboardpetugas', [DashboardPetugasController::class, 'index']);
 
     
 
@@ -40,5 +40,5 @@ Route::middleware(['guest'])->group(function(){
     Route::get('/add', [UpdateLokerController::class, 'display']);
     Route::post('/add', [UpdateLokerController::class, 'store'])->name('loker.store');
     Route::get('/logout', [LoginUserController::class, 'logout'])->name('logout');
-// });
+});
 

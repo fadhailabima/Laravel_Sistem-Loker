@@ -39,7 +39,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                <form class="form-signin" method="post" action="dashboardpetugas">
+                <form class="form-signin" method="post" action="/">
                     @csrf
                     <h2 class="h3 mb-3 font-weight-normal">Sistem Lowongan Kerja</h2>
                     <label for="email" class="sr-only">Email</label>
