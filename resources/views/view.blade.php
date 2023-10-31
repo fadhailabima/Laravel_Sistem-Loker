@@ -49,21 +49,90 @@
                         
                     </div>
                 </div>
-
-                <!-- Daftar Pencari Kerja -->
-                <h2>Daftar Pencari Kerja yang Melamar</h2>
-                <ul class="list-group">
-                    <a href="/updatepencaker/{{$loker->noktp}}"class="btn btn-info">View</a>
-                    <li class="list-group-item">{{$loker->nama}} Tahapan : {{$loker->tahapan}}</li>
-                    
-                    
-                    <!-- Tambahkan nama-nama pencari kerja lainnya -->
-                </ul>
                 @endforeach
+                
+                
+                <h2>Daftar Pencari Kerja yang Melamar</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Tahapan</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($lokers as $loker)
+                        @if($loker->tahapan === 'Apply')
+                        <tr>
+                            <td>{{$loker->nama}}</td>
+                            <td>{{$loker->tahapan}}</td>
+                            <td>
+                                 <a href="/updatepencaker/{{$loker->noktp}}" class="btn btn-info">Edit</a>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                <h2>Daftar Pencari Kerja yang Lulus Seleksi Administrasi</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Tahapan</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            @foreach($lokers as $loker)
+                            @if($loker->tahapan === 'Seleksi Administrasi')
+                            <td>{{$loker->nama}}</td>
+                            <td>{{$loker->tahapan}}</td>
+                            <td>
+                                 <a href="/updatepencaker/{{$loker->noktp}}" class="btn btn-info">Edit</a>
+                            </td>
+                        </tr>
+                            @endif
+                            @endforeach
+                    </tbody>
+                </table>
+                
+                <!-- Daftar Pencari Kerja yang Lulus Seleksi Wawancara -->
+                <h2>Daftar Pencari Kerja yang Lulus Seleksi Wawancara</h2>
+                <table class="table">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Tahapan</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($lokers as $loker)
+                        @if($loker->tahapan === 'Seleksi Wawancara')
+                        <tr>
+                            <td>{{$loker->nama}}</td>
+                            <td>{{$loker->tahapan}}</td>
+                            <td>
+                                 <a href="/updatepencaker/{{$loker->noktp}}" class="btn btn-info">Edit</a>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                
+                
+                
+                
             </main>
         </div>
     </div>
-
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

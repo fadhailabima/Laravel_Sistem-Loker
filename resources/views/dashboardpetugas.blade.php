@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="add"class="btn">Tambah Loker</a>
+                    <a href="add"class="btn btn-outline-primary">Tambah Loker</a>
                 </div>
                 <!-- Tabel Lowongan Kerja -->
                 <div class="table-responsive">
@@ -72,10 +72,10 @@
                                 <td>
                                     <a href="/detail/{{$loker->idloker}}"class="btn btn-info">View</a>
                                     <a href="/edit/{{$loker->idloker}}" class="btn btn-primary">Edit</a>
-                                    <form action="/deleteLoker/{{ $loker->idloker }}" method="POST">
+                                    <form action="/deleteLoker/{{ $loker->idloker }}" method="POST" class="d-inline">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah kamu yakin?')">Delete</button>
                                       </form>
                                 </td>
                             </tr>
@@ -115,30 +115,30 @@
         });
 
         document.getElementById('filterStatus').addEventListener('change', function() {
-            var filter = this.value.toUpperCase();
-            var table = document.getElementById('lokerTable');
-            var tr = table.getElementsByTagName('tr');
+    var filter = this.value.toUpperCase();
+    var table = document.getElementById('lokerTable');
+    var tr = table.getElementsByTagName('tr');
 
-            for (var i = 0; i < tr.length; i++) {
-                var td = tr[i].getElementsByTagName('td')[2]; // Kolom Status Lowongan Kerja (indeks 2)
+    for (var i = 0; i < tr.length; i++) {
+        var td = tr[i].getElementsByTagName('td')[2]; 
 
-                if (filter === 'all' || !td) {
-                    tr[i].style.display = '';
-                    continue;
-                }
+        if (filter === 'ALL' || !td) {
+            tr[i].style.display = '';
+            continue;
+        }
 
-                if (!td) {
-                    continue;
-                }
+        if (!td) {
+            continue;
+        }
 
-                var txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = '';
-                } else {
-                    tr[i].style.display = 'none';
-                }
-            }
-        });
+        var txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = '';
+        } else {
+            tr[i].style.display = 'none';
+        }
+    }
+});
     </script>
 </body>
 

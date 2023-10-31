@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 d-md-block bg-light sidebar">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -26,7 +26,7 @@
                 </div>
             </nav>
            
-            <div class="col-md-6 offset-md-3 mt-5">
+            <div class="col-md-6 mt-5">
                 <h1 class="text-center">Edit Pencari Kerja</h1>
                 @foreach($pencakers as $pencaker)
                 <form method="POST" action="/updatepencaker/{{ $pencaker->noktp }}">
@@ -39,9 +39,9 @@
 
                     <div class="form-group">
                         <label for="tahapan">Tahapan Pencari Kerja</label>
-                        <select class="form-control" id="tahapan">
-                            <option value="Seleksi Wawancara" {{ $pencaker->tahapan == 'Seleksi Wawancara' ? 'selected' : '' }}>Seleksi Wawancara</option>
-                            <option value="Seleksi Administrasi" {{ $pencaker->tahapan == 'Seleksi Administrasi' ? 'selected' : '' }}>Seleksi Administrasi</option>
+                        <select class="form-control" id="tahapan" name="tahapan">
+                            <option value="2" >Seleksi Wawancara</option>
+                                <option value="1" >Seleksi Administrasi</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

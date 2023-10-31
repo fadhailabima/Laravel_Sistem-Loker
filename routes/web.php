@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/deleteLoker/{id}', [DashboardPetugasController::class, 'destroy']);
     Route::get('/edit/{id}', [UpdateLokerController::class, 'edit']);
     Route::put('/edit/{id}', [UpdateLokerController::class, 'update']);
-    Route::get('/updatepencaker/{id}', [UpdatePencakerController::class, 'edit']);
+    Route::get('/updatepencaker/{id}', [UpdatePencakerController::class, 'display']);
     Route::put('/updatepencaker/{id}', [UpdatePencakerController::class, 'update']);
 
     Route::get('/add', [UpdateLokerController::class, 'display']);

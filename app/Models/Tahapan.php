@@ -12,4 +12,5 @@ class Tahapan extends Model
         'idtahapan',
         'nama',
     ];
+    protected $primaryKey = 'idtahapan';
 }

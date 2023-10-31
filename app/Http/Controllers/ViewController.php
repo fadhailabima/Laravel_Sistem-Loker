@@ -15,7 +15,7 @@ class ViewController extends Controller
     ->leftJoin('tahapan_applies', 'apply_lokers.idapply', '=', 'tahapan_applies.idapply')
     ->leftJoin('tahapans', 'tahapan_applies.idtahapan', '=', 'tahapans.idtahapan')
     ->leftJoin('lokers', 'apply_lokers.idloker', '=', 'lokers.idloker')
-    ->where('lokers.idloker', $id)
+    ->where('lokers.idloker','=', $id)
     ->select(
         'lokers.nama as nama_pekerjaan',
         'pencakers.noktp',
@@ -32,7 +32,11 @@ class ViewController extends Controller
         'pencakers.nama',
         'tahapans.nama as tahapan'
     )
+    ->distinct()
     ->get();
+
+
+
 
         return view ('view', compact('lokers'));
     }

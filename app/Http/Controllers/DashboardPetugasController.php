@@ -12,6 +12,14 @@ class DashboardPetugasController extends Controller
         return view ('dashboardpetugas', compact('lokers'));
     }
 
+    public function update(Request $request, $id)
+{
+     $lokers = Loker::find($id)->update([
+            'nama' => $request->nama,
+            'tipe' => $request->tipe,
+            'status' => $request->status
+        ]);
+    }
     public function destroy($id)
     {
 

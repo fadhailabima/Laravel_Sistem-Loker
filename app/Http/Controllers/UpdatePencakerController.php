@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Pencaker;
 use App\Models\Tahapan;
+use App\Models\TahapanApply;
 use Illuminate\Http\Request;
 use DB;
 
 
 class UpdatePencakerController extends Controller
 {
-    public function edit($id)
+    public function display($id)
     {
         $pencakers = DB::table('pencakers')
             ->select('pencakers.noktp', 'pencakers.nama', 'tahapans.nama as tahapan')
@@ -17,7 +18,10 @@ class UpdatePencakerController extends Controller
             ->leftJoin('tahapan_applies', 'apply_lokers.idapply', '=', 'tahapan_applies.idapply')
             ->leftJoin('tahapans', 'tahapan_applies.idtahapan', '=', 'tahapans.idtahapan')
             ->where('pencakers.noktp', $id)
+            ->distinct()
             ->get();
+
+        
 
 
 
@@ -26,15 +30,18 @@ class UpdatePencakerController extends Controller
     }
 
     public function update(Request $request, $id){
-        $pencakers = Pencaker::find($id)->update([
-            // 'nama' => $request->nama,
-            // 'jenis_kelamin' => $request->jenis_kelamin,
-            'status' => $request->status
-        ]);
 
+        
+        
+        
 
-    // $lokers->save();
+        $affected = DB::table('tahapan_applies')
+            ->leftJoin('apply_lokers', 'apply_lokers.idapply', '=', 'tahapan_applies.idapply')
+            ->where('apply_lokers.noktp', $id)
+            ->update(['idtahapan' => $request->tahapan]);
+            
 
-    return redirect('/dashboardpetugas')->with('success', 'Loker berhasil diperbarui');
-    }
+    return redirect('/dashboardpetugas')->with('success', 'Tahapan berhasil diperbarui');
+}
+
 }
